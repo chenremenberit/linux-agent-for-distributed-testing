@@ -54,13 +54,6 @@ class WebSocketChannel:
             self.logger.error(e)
             return False
 
-    async def start_websocket_server(self):
-        """
-        启动服务器进程保持一直运行
-        """
-        async with websockets.serve( self.host, self.port):
-            await asyncio.Future()
-
     def asyncio_run_send_message_to_websocket_server(self, command, receiver_device_id):
         """
         异步运行发送信息的函数
@@ -76,5 +69,5 @@ class WebSocketChannel:
 
 if __name__ == "__main__":
     websocket = WebSocketChannel("71.255.2.21", 5678, "A")
-    websocket.asyncio_run_send_message_to_websocket_server("template1")
+    websocket.asyncio_run_send_message_to_websocket_server("template1", "A")
     # websocket.asyncio_run_receive_message_from_device("A")

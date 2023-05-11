@@ -92,5 +92,5 @@ if __name__ == "__main__":
     mqtt = ControllerChannel("A")
     mqtt.launch_get_message_threads()
     mqtt.reply_to_server()
-    
+
     # mqtt.get_message_from_device("MQTT")
