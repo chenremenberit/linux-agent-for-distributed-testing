@@ -46,7 +46,7 @@ class MQTTChannel:
         protocol = received_element_list[MessageFormatEnum.RECEIVING_PROTOCOL_POSITION.value]
         if self.device_id == receiver_device_id and protocol == "MQTT":
             self.mqtt_message_queue.put(receive_message)
-            self.logger.info("received message: " + receive_message)
+            self.logger.info("mqtt_message_queue newly adds: " + receive_message)
         self.mqtt_message_queue.put(str(msg.payload))
         self.logger.info("from topic:" + msg.topic + ", the message is :" + str(msg.payload))
         return msg

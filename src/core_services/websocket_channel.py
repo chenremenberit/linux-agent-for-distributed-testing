@@ -27,13 +27,13 @@ class WebSocketChannel:
             try:
                 async with websockets.connect("ws://" + self.host + ":" + str(self.port)) as websocket:
                     receive_message = await websocket.recv()
-                    message_list = receive_message .splitlines()
+                    message_list = receive_message.splitlines()
                     received_element_list = [content.split(": ", maxsplit=1)[1] for content in message_list]
                     receiver_device_id = received_element_list[MessageFormatEnum.RECEIVING_RECEIVER_POSITION.value]
                     protocol = received_element_list[MessageFormatEnum.RECEIVING_PROTOCOL_POSITION.value]
                     if self.device_id == receiver_device_id and protocol == "WebSocket":
                         self.websocket_message_queue.put(receive_message)
-                        self.logger.info("received message: " + receive_message)
+                        self.logger.info("websocket_message_queue newly adds: " + receive_message)
             except websockets.ConnectionClosed as e:
                 self.logger.info(e)
                 break

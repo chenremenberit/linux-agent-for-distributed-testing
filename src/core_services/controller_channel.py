@@ -64,6 +64,7 @@ class ControllerChannel:
             channel_message_queue = getattr(channel, channel_message_queue_name)
             message = channel_message_queue.get()
             self.message_queue.put(message)
+            self.logger.info("message_queue newly adds: " + message)
         return receive_message()
 
     def launch_get_message_threads(self):
@@ -78,6 +79,7 @@ class ControllerChannel:
         '''
         根据获取信息的queue来回复服务器
         '''
+        self.send_message_to_server("WebSocket", "template1", "A")
         while True:
             message = self.message_queue.get()
             message_list = message.splitlines()
