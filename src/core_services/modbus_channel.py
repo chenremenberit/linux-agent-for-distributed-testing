@@ -8,11 +8,12 @@ from util.logger_manager_ment import Logger
 
 
 class ModBusChannel:
-    def __init__(self):
+    def __init__(self, device_id):
         '''
         Modbus协议交互是通过串口工具将开发板的串口接口连接到PCB的串口专用USB接口上
         :return:
         '''
+        self.device_id = device_id
         self.serial_file_location_dict = {"A": "/dev/ttyUSB0"}
         self.logger = Logger("ModbusController")
         self.modbus_message_queue = queue.Queue()
@@ -70,5 +71,5 @@ class ModBusChannel:
 
 
 if __name__ == "__main__":
-    modbus = ModBusChannel()
+    modbus = ModBusChannel("A")
     modbus.send_message_to_device_through_serial("template1", "A")
